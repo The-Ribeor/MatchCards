@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Card } from "../components/Card";
 import { Timer } from "../components/Timer";
 import { GameController } from "../components/GameController";
 import { Footer } from "../components/Footer";
-
 
 const emojis = ["🤖", "👽", "🤡", "👻", "🎃", "👾", "😈", "🥶"];
 
@@ -26,7 +25,6 @@ export const GameScreen = () => {
     setCards(newCards);
     setSelectedCards([...selectedCards, id]);
   };
-
 
   useEffect(() => {
     if (selectedCards.length === 2) {

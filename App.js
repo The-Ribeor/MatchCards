@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
-import { StyleSheet } from "react-native";
-import { Root } from "./src/Root";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { AppStack } from "./src/navigations/AppStack";
 import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
+import { SoundProvider } from "./src/context/SoundContext";
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -43,23 +41,10 @@ export default function App() {
 
   // Si las fuentes están cargadas, renderiza la aplicación
   return (
-    <NavigationContainer>
-      <AppStack />
-    </NavigationContainer>
+    <SoundProvider>
+      <NavigationContainer>
+        <AppStack />
+      </NavigationContainer>
+    </SoundProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    color: "red",
-    backgroundColor: "#000", // Asegúrate de que el fondo sea coherente con tu diseño
-  },
-});
-
-// <SafeAreaProvider>
-//   <SafeAreaView style={styles.safeArea}>
-//     <Root />
-
-//   </SafeAreaView>
-// </SafeAreaProvider>

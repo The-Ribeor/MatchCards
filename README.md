@@ -123,14 +123,6 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
 
 ---
 
-## Capturas de Pantalla 📸
-
-![alt text](image.png)
-
----
-
-
-
 
 ## Créditos 👏
 

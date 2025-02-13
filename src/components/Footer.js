@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Easing } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Animated, Easing, Linking } from "react-native";
 import React, { useEffect, useRef } from "react";
 
 export const Footer = () => {
@@ -25,10 +25,14 @@ export const Footer = () => {
     pulse();
   }, [scaleAnim]);
 
+  const openURL = () => {
+    Linking.openURL("https://github.com/Diegoberrio1601");
+  };
+
   return (
     <View style={styles.footer}>
       <Text style={styles.footerText}>Designed by </Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={openURL}>
         <Text style={styles.footerBottonText}>The Ribeor</Text>
       </TouchableOpacity>
       <Animated.Text style={[styles.heart, { transform: [{ scale: scaleAnim }] }]}>

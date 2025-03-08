@@ -1,4 +1,199 @@
-import React, { useEffect, useRef } from "react";
+
+
+// import React, { useEffect, useState } from "react";
+// import {
+//   View,
+//   Text,
+//   TouchableOpacity,
+//   StyleSheet,
+//   Dimensions,
+//   Animated,
+//   StatusBar,
+//   SafeAreaView,
+// } from "react-native";
+// import { useNavigation } from "@react-navigation/native";
+// import { Footer } from "../components/Footer";
+
+// // Obtener dimensiones de pantalla como constantes
+// const { width, height } = Dimensions.get("window");
+
+// export const LobbyScreen = () => {
+//   // Hooks deben estar al inicio del componente
+//   const navigation = useNavigation();
+
+//   // Usamos useState para almacenar los valores de animación
+//   const [animations] = useState({
+//     leftAnimation: new Animated.Value(0),
+//     rightAnimation: new Animated.Value(0),
+//   });
+
+//   // Cálculos responsivos movidos a un estado para asegurar consistencia
+//   const [responsiveStyles] = useState(() => {
+//     const titleFontSize = Math.min(width, height) * 0.1; // Ajustado para mejor visualización
+//     const buttonWidth = width * 0.8;
+
+//     return {
+//       titleFontSize,
+//       buttonWidth,
+//     };
+//   });
+
+//   // Creamos las dos palabras del título y las dividimos en letras
+//   const leftWord = "MATCH";
+//   const rightWord = "CARDS";
+//   const leftLetters = leftWord.split("");
+//   const rightLetters = rightWord.split("");
+
+//   // useEffect debe estar con el resto de hooks
+//   useEffect(() => {
+//     // Secuencia de animación
+//     Animated.sequence([
+//       // Primero anima la columna izquierda
+//       Animated.timing(animations.leftAnimation, {
+//         toValue: 1,
+//         duration: 800,
+//         useNativeDriver: true,
+//       }),
+//       // Luego anima la columna derecha
+//       Animated.timing(animations.rightAnimation, {
+//         toValue: 1,
+//         duration: 800,
+//         useNativeDriver: true,
+//       }),
+//     ]).start();
+//   }, []); // Sin dependencias, solo se ejecuta al montar
+
+//   return (
+//     <SafeAreaView style={styles.safeArea}>
+//       <StatusBar barStyle="light-content" backgroundColor="#000" />
+
+//       <View style={styles.container}>
+//         {/* Contenedor para las dos columnas de letras */}
+//         <View style={styles.logoContainer}>
+//           {/* Columna izquierda: Letras de "MATCH" */}
+//           <Animated.View
+//             style={{
+//               opacity: animations.leftAnimation,
+//               transform: [
+//                 {
+//                   translateY: animations.leftAnimation.interpolate({
+//                     inputRange: [0, 1],
+//                     outputRange: [-100, 0], // Animación de entrada desde arriba
+//                   }),
+//                 },
+//               ],
+//             }}
+//           >
+//             {leftLetters.map((letter, index) => (
+//               <Text
+//                 key={index}
+//                 style={[
+//                   styles.titleText,
+//                   { fontSize: responsiveStyles.titleFontSize },
+//                 ]}
+//               >
+//                 {letter}
+//               </Text>
+//             ))}
+//           </Animated.View>
+
+//           {/* Columna derecha: Letras de "CARDS" */}
+//           <Animated.View
+//             style={{
+//               opacity: animations.rightAnimation,
+//               transform: [
+//                 {
+//                   translateY: animations.rightAnimation.interpolate({
+//                     inputRange: [0, 1],
+//                     outputRange: [100, 0], // Animación de entrada desde abajo
+//                   }),
+//                 },
+//               ],
+//             }}
+//           >
+//             {rightLetters.map((letter, index) => (
+//               <Text
+//                 key={index}
+//                 style={[
+//                   styles.titleText,
+//                   { fontSize: responsiveStyles.titleFontSize },
+//                 ]}
+//               >
+//                 {letter}
+//               </Text>
+//             ))}
+//           </Animated.View>
+//         </View>
+
+//         {/* Área de botones */}
+//         <View style={styles.buttonArea}>
+//           <TouchableOpacity
+//             style={[styles.button, { width: responsiveStyles.buttonWidth }]}
+//             onPress={() => navigation.navigate("Game")}
+//             activeOpacity={0.7}
+//           >
+//             <Text style={styles.buttonText}>New Game</Text>
+//           </TouchableOpacity>
+//         </View>
+
+//         <Footer />
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   safeArea: {
+//     flex: 1,
+//     backgroundColor: "#000",
+//   },
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#000",
+//     justifyContent: "space-between",
+//     padding: 20,
+//   },
+//   logoContainer: {
+//     flex: 1,
+//     flexDirection: "row", // Dos columnas
+//     alignItems: "center",
+//     justifyContent: "center",
+//     gap: 40, // Espacio entre las columnas
+//   },
+//   titleText: {
+//     color: "#C5B3F9",
+//     fontFamily: "RevRegular",
+//     textTransform: "uppercase",
+//     textAlign: "center",
+//   },
+//   buttonArea: {
+//     width: "100%",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     marginBottom: 40,
+//   },
+//   button: {
+//     backgroundColor: "#F7DF63",
+//     paddingVertical: 15,
+//     borderRadius: 10,
+//     alignItems: "center",
+//     justifyContent: "center",
+//     marginBottom: 15,
+//     shadowColor: "#F7DF63",
+//     shadowOffset: { width: 0, height: 2 },
+//     shadowOpacity: 0.3,
+//     shadowRadius: 4,
+//     elevation: 3,
+//   },
+//   buttonText: {
+//     color: "#170801",
+//     fontSize: 22,
+//     fontFamily: "RevSemiBold",
+//     textAlign: "center",
+//   },
+// });
+
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,160 +201,187 @@ import {
   StyleSheet,
   Dimensions,
   Animated,
+  StatusBar,
+  SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Footer } from "../components/Footer";
 
+// Obtener dimensiones de pantalla como constantes
 const { width, height } = Dimensions.get("window");
 
 export const LobbyScreen = () => {
+  // Hooks deben estar al inicio del componente
   const navigation = useNavigation();
 
-  const leftColumn = ["M", "A", "T", "C", "H"].reverse();
-  const rightColumn = ["C", "A", "R", "D", "S"].reverse();
+  // Usamos useState para almacenar los valores de animación
+  const [animations] = useState({
+    leftAnimation: new Animated.Value(0),
+    rightAnimation: new Animated.Value(0),
+  });
 
-  // Inicializamos las animaciones con un valor de 0 (posición inicial)
-  const leftAnimations = leftColumn.map(
-    () => useRef(new Animated.Value(0)).current
-  );
-  const rightAnimations = rightColumn.map(
-    () => useRef(new Animated.Value(0)).current
-  );
+  // Cálculos responsivos movidos a un estado para asegurar consistencia
+  const [responsiveStyles] = useState(() => {
+    const titleFontSize = Math.min(width, height) * 0.26; 
+    
+    const buttonWidth = width * 0.8;
 
+    return {
+      titleFontSize,
+      buttonWidth,
+    };
+  });
+
+  // Creamos las dos palabras del título y las dividimos en letras
+  const leftWord = "MATCH";
+  const rightWord = "CARDS";
+  const leftLetters = leftWord.split("");
+  const rightLetters = rightWord.split("");
+
+  // useEffect debe estar con el resto de hooks
   useEffect(() => {
-    // Animamos las letras para que roten hacia la izquierda
-    const animations = [
-      ...leftAnimations.map((anim, index) =>
-        Animated.timing(anim, {
-          toValue: 1, // Valor final de la animación (1 para la interpolación)
-          duration: 700,
-          delay: index * 100,
-          useNativeDriver: true,
-        })
-      ),
-      ...rightAnimations.map((anim, index) =>
-        Animated.timing(anim, {
-          toValue: 1, // Valor final de la animación (1 para la interpolación)
-          duration: 700,
-          delay: index * 100,
-          useNativeDriver: true,
-        })
-      ),
-    ];
-
-    // Iniciamos las animaciones
-    Animated.stagger(100, animations).start();
-  }, []);
+    // Secuencia de animación
+    Animated.sequence([
+      // Primero anima la columna izquierda
+      Animated.timing(animations.leftAnimation, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      // Luego anima la columna derecha
+      Animated.timing(animations.rightAnimation, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []); // Sin dependencias, solo se ejecuta al montar
 
   return (
-    <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        {/* Columna izquierda */}
-        <View style={styles.column}>
-          {leftColumn.map((letter, index) => (
-            <Animated.View
-              key={index}
-              style={[
-                styles.letterContainer,
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="light-content" backgroundColor="#000" />
+
+      <View style={styles.container}>
+        {/* Contenedor para las dos columnas de letras */}
+        <View style={styles.logoContainer}>
+          {/* Columna izquierda: Letras de "MATCH" */}
+          <Animated.View
+            style={{
+              opacity: animations.leftAnimation,
+              transform: [
                 {
-                  transform: [
-                    {
-                      rotateZ: leftAnimations[index].interpolate({
-                        inputRange: [0, 1],
-                        outputRange: ["0deg", "-90deg"], // Rotación de 0 a -45 grados
-                      }),
-                    },
-                  ],
+                  translateY: animations.leftAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [-100, 0], // Animación de entrada desde arriba
+                  }),
                 },
-              ]}
-            >
-              <Text style={styles.letter}>{letter}</Text>
-            </Animated.View>
-          ))}
+              ],
+            }}
+          >
+            {leftLetters.map((letter, index) => (
+              <Text
+                key={index}
+                style={[
+                  styles.titleText,
+                  { fontSize: responsiveStyles.titleFontSize },
+                ]}
+              >
+                {letter}
+              </Text>
+            ))}
+          </Animated.View>
+
+          {/* Columna derecha: Letras de "CARDS" */}
+          <Animated.View
+            style={{
+              opacity: animations.rightAnimation,
+              transform: [
+                {
+                  translateY: animations.rightAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [100, 0], // Animación de entrada desde abajo
+                  }),
+                },
+              ],
+            }}
+          >
+            {rightLetters.map((letter, index) => (
+              <Text
+                key={index}
+                style={[
+                  styles.titleText,
+                  { fontSize: responsiveStyles.titleFontSize },
+                ]}
+              >
+                {letter}
+              </Text>
+            ))}
+          </Animated.View>
         </View>
 
-        {/* Columna derecha */}
-        <View style={styles.column}>
-          {rightColumn.map((letter, index) => (
-            <Animated.View
-              key={index}
-              style={[
-                styles.letterContainer,
-                {
-                  transform: [
-                    {
-                      rotateZ: rightAnimations[index].interpolate({
-                        inputRange: [0, 1],
-                        outputRange: ["0deg", "-90deg"], // Rotación de 0 a -45 grados
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
-              <Text style={styles.letter}>{letter}</Text>
-            </Animated.View>
-          ))}
+        {/* Área de botones */}
+        <View style={styles.buttonArea}>
+          <TouchableOpacity
+            style={[styles.button, { width: responsiveStyles.buttonWidth }]}
+            onPress={() => navigation.navigate("Game")}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.buttonText}>New Game</Text>
+          </TouchableOpacity>
         </View>
+
+        <Footer />
       </View>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Game")}
-      >
-        <Text style={styles.buttonText}>New Game</Text>
-      </TouchableOpacity>
-
-      <Footer />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#000",
+  },
   container: {
     flex: 1,
     backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     padding: 20,
   },
-  titleContainer: {
-    flexDirection: "row",
-    width: width * 0.9,
-    height: height * 0.8,
-    justifyContent: "space-between",
-  },
-  column: {
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+  logoContainer: {
     flex: 1,
-  },
-  letterContainer: {
-    justifyContent: "center",
+    flexDirection: "row", // Dos columnas
     alignItems: "center",
-    width: 150,
-    height: 150,
+    justifyContent: "center",
+    gap: 40, // Espacio entre las columnas
   },
-  letter: {
+  titleText: {
     color: "#C5B3F9",
     fontFamily: "RevRegular",
-    fontSize: 180,
     textTransform: "uppercase",
-    lineHeight: 180,
+    textAlign: "center",
+  },
+  buttonArea: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 40,
   },
   button: {
     backgroundColor: "#F7DF63",
     paddingVertical: 15,
-    paddingHorizontal: 40,
     borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 10,
-    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 15,
+    shadowColor: "#F7DF63",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
   },
   buttonText: {
     color: "#170801",
-    fontSize: 21,
+    fontSize: 22,
     fontFamily: "RevSemiBold",
     textAlign: "center",
   },

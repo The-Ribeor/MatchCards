@@ -3,6 +3,13 @@
 ¡Bienvenido a **MatchCards**! Una aplicación de juego de memoria interactiva y divertida, diseñada para desafiar tu capacidad de recordar y emparejar cartas. Con una interfaz atractiva, efectos de sonido y animaciones, esta aplicación te mantendrá entretenido mientras mejoras tu memoria.
 
 ---
+### Expo Snack  
+
+Prueba la versión interactiva del juego **MATCH CARDS** en Expo Snack:  
+
+➡️ [MATCH CARDS - Expo Snack](https://snack.expo.dev/@diegoberrio1601/-matchcards)  
+
+---
 ## Capturas de Pantalla 📸
 
 ![alt text](image.png)

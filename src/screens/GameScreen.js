@@ -95,13 +95,6 @@ export const GameScreen = () => {
         bestTime={bestTime}
       />
       <View style={styles.board}>
-        {/* {!isGameCompleted ? (
-          <View style={styles.messageContainer}>
-            <Text style={styles.instructions}>
-              Press the button to start playing
-            </Text>
-          </View>
-        ): null} */}
         {!gameStarted && !isGameCompleted && (
           <View style={styles.messageContainer}>
             <Text style={styles.instructions}>
@@ -157,3 +150,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
+
+
+

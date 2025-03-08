@@ -1,3 +1,6 @@
+
+
+
 // import React, { useRef, useEffect, useContext } from "react";
 // import { TouchableOpacity, Animated, StyleSheet, Text } from "react-native";
 // import { Audio } from "expo-av";
@@ -73,7 +76,6 @@
 //   );
 // };
 
-// // Estilos (igual que antes)
 // const styles = StyleSheet.create({
 //   card: {
 //     width: 80,
@@ -92,19 +94,32 @@
 //   },
 // });
 
-
 import React, { useRef, useEffect, useContext } from "react";
-import { TouchableOpacity, Animated, StyleSheet, Text } from "react-native";
+import { TouchableOpacity, Animated, StyleSheet, Text, Dimensions, PixelRatio } from "react-native";
 import { Audio } from "expo-av";
 import { SoundContext } from "../context/SoundContext";
+
+const { width, height } = Dimensions.get("window"); // Obtener el tamaño de la pantalla
+
+// Función para determinar el tamaño adecuado
+const getCardSize = () => {
+  const aspectRatio = height / width;
+  const pixelDensity = PixelRatio.get();
+
+  if (width <= 375 && pixelDensity >= 2 && aspectRatio > 1.5) {
+    return 60; // Para dispositivos como iPhone SE (3ra gen)
+  }
+  return 80; // Para teléfonos más grandes
+};
+
+const CARD_SIZE = getCardSize();
 
 export const Card = ({ card, onPress }) => {
   const flipAnimation = useRef(new Animated.Value(0)).current;
   const soundObject = useRef(new Audio.Sound());
-  const { isMusicOn } = useContext(SoundContext); // Usar el contexto
+  const { isMusicOn } = useContext(SoundContext);
 
   useEffect(() => {
-    // Cargar el sonido cuando el componente se monta
     const loadSound = async () => {
       await soundObject.current.loadAsync(
         require("../../assets/traks/flip.mp3")
@@ -112,7 +127,6 @@ export const Card = ({ card, onPress }) => {
     };
     loadSound();
 
-    // Limpiar el sonido cuando el componente se desmonta
     return () => {
       soundObject.current.unloadAsync();
     };
@@ -132,9 +146,8 @@ export const Card = ({ card, onPress }) => {
   });
 
   const handlePress = async () => {
-    onPress(); // Llama a la función onPress original
+    onPress();
 
-    // Reproducir el sonido solo si isMusicOn es true
     if (isMusicOn) {
       try {
         await soundObject.current.replayAsync();
@@ -147,7 +160,7 @@ export const Card = ({ card, onPress }) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
-      style={styles.card}
+      style={[styles.card, { width: CARD_SIZE, height: CARD_SIZE }]}
       disabled={card.matched}
     >
       <Animated.View
@@ -160,7 +173,7 @@ export const Card = ({ card, onPress }) => {
           },
         ]}
       >
-        <Text style={styles.text}>
+        <Text style={[styles.text, { fontSize: CARD_SIZE * 0.7 }]}>
           {card.flipped || card.matched ? card.emoji : "❓"}
         </Text>
       </Animated.View>
@@ -170,8 +183,6 @@ export const Card = ({ card, onPress }) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: 80,
-    height: 80,
     margin: 5,
   },
   innerCard: {
@@ -182,6 +193,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    fontSize: 50,
+    fontWeight: "bold",    
   },
 });

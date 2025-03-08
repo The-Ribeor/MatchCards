@@ -2,13 +2,11 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LobbyScreen } from "../screens/LobbyScreen";
 import { GameScreen } from "../screens/GameScreen";
-import { useNavigation } from "@react-navigation/native";
 import { BackButton } from "../components/BackButton";
 import { HeaderButtons } from "../components/HeaderButtons";
 
 export const AppStack = () => {
   const Stack = createNativeStackNavigator();
-  const navigation = useNavigation();
   return (
     <Stack.Navigator initialRouteName="Lobby">
       <Stack.Screen
